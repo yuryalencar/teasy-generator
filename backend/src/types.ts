@@ -25,20 +25,18 @@ const createTree = ( bodyTree : ITree ) => {
     return tree;
 }
 
-const treeIsValidOrFail = ( { root } : ITree ) => {
-
-    if(isUndefined(root)){
-        throw ("Body informed is an invalid tree");
-    }
-
-    createPage( root );
-}
-
 const createPage = ({ name, actions } : IPage) => {
+
     if(isNull(name) || isUndefined(name) || isUndefined(actions) ) {
         throw ("Body informed is an invalid tree");
     }
-    
+
+    if(!isNull(actions)){
+        actions!.forEach( action => {
+            createAction(action);
+        });
+    }
+
     const page = {
         name,
         actions
@@ -47,5 +45,31 @@ const createPage = ({ name, actions } : IPage) => {
     return page;
 }
 
+const createAction = ({ keyword, nextPage } : IAction) => {
+
+    if(isNull(keyword) || isUndefined(keyword) || isUndefined(nextPage)){
+        throw ("Body informed is an invalid tree");
+    }
+
+    if(!isNull(nextPage)){
+        createPage(nextPage!);
+    }
+
+    const action = {
+        keyword,
+        nextPage
+    }
+
+    return action;
+}
+
+const treeIsValidOrFail = ( { root } : ITree ) => {
+
+    if(isUndefined(root)){
+        throw ("Body informed is an invalid tree");
+    }
+
+    createPage( root );
+}
 
 export { createTree };

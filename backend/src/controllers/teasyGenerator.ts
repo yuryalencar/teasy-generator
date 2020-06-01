@@ -5,8 +5,6 @@ const depthFirstSearch = async ({ request, response }: { request: any; response:
         const body = await request.body();
         const tree = createTree(body.value);
         
-        console.log(tree);
-
         response.body = tree;
         response.status = 200;
     }catch (error) {
