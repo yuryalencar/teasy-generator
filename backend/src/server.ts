@@ -1,14 +1,17 @@
-import { serve } from "https://deno.land/std@0.53.0/http/server.ts";
+import { Application } from "https://deno.land/x/oak/mod.ts";
+import { APP_PORT, APP_HOST } from "./config.ts";
+import router from "./routes.ts";
 
 console.log("→ Starting Teasy Generator Backend 🦕");
 
-const connection = serve({ port: 8000 });
+const application = new Application();
+
+console.log("→ Setting server and routes ⚙️ ");
+
+application.use(router.routes());
+application.use(router.allowedMethods());
 
 console.log("→ Teasy Backend Running 🔥");
-console.log("→ Go Make a Request in http://localhost:8000/ 🌎");
+console.log(`→ Go Make a Request in http://${APP_HOST}:${APP_PORT}/ 🌎`);   
 
-
-for await (const request of connection) {
-    console.log(request.url);
-    request.respond({ body: "Hello World\n" });
-}
+await application.listen(`${APP_HOST}:${APP_PORT}`);
