@@ -1,12 +1,22 @@
-import { IPage } from "../models/page.ts";
-import { IAction } from "../models/action.ts";
+import { createTree } from "../types.ts";
 
 const depthFirstSearch = async ({ request, response }: { request: any; response: any }) => {
-  const body = await request.body();
-  //const book: IBook = body.value
-  //books.push(book)
-  response.body = body.value;
-  response.status = 200;
+    try{
+        const body = await request.body();
+        const tree = createTree(body.value);
+        
+        console.log(tree);
+
+        response.body = tree;
+        response.status = 200;
+    }catch (error) {
+        response.body = {
+            message: "Your not send a tree, for more details access: https://github.com/yuryalencar/TeasyFSMGenerator"
+        };
+        response.status = 400;
+
+        console.log("→ An Error has Ocurred in import of the tree (depthFirstSearch : method) 💥 ");
+    }
 }
 
 export { depthFirstSearch };
