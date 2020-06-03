@@ -1,11 +1,11 @@
-import { createTree } from "../types.ts";
+import { generateSequenceUsingTree } from "../services/depthFirstSearch.ts";
 
 const depthFirstSearch = async ({ request, response }: { request: any; response: any }) => {
     try{
         const body = await request.body();
-        const tree = createTree(body.value);
+        const sequences = generateSequenceUsingTree(body.value);
         
-        response.body = tree;
+        response.body = sequences;
         response.status = 200;
     }catch (error) {
         response.body = {

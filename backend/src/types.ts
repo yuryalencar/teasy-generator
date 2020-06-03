@@ -7,6 +7,7 @@ interface ITree {
 interface IPage {
     name: string;
     actions: Array<IAction> | null;
+    visited? : boolean;
 }
 
 interface IAction {
@@ -72,4 +73,4 @@ const treeIsValidOrFail = ( { root } : ITree ) => {
     createPage( root );
 }
 
-export { createTree };
+export { createTree, ITree, IAction, IPage };
