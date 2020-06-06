@@ -1,15 +1,16 @@
 import { createTree, ITree, IPage, IAction } from "../types.ts";
 import { isNull } from "../helpers.ts";
 
-let sequences: any[] = [];
-let stack: string[] = [];
+let stack: string[];
+let sequences: any[];
 
 const generateSequenceUsingTree = ( requestBody: ITree ) => {
     const tree = createTree(requestBody);
+    stack = [];
+    sequences = [];
+    
     visitPage( tree.root );
-    console.log("sequences", sequences);
-    console.log("stack", stack);
-    return tree;
+    return sequences;
 }
 
 function visitPage( page: IPage ){
@@ -19,23 +20,23 @@ function visitPage( page: IPage ){
         page.actions!.forEach( action => {
             visitAction(action);
         });
+
+        stack.pop();
+    } else {
+        saveSequence();
     }
 }
 
 function visitAction( action: IAction ){
-    if(!isNull(action.nextPage)){
-        stack.push(action.keyword);
-        console.log("PUSHED KEYWORD");
-        visitPage(action.nextPage!);
-    } else if(stack.length > 0) {
-        let sequence: string[] = [...stack];
-        sequences.push(sequence);
-        console.log("PUSHED SEQUENCE");
-        stack.pop();
-        console.log("POPED KEYWORD");
-    }
+    
+    stack.push(action.keyword);
+    isNull(action.nextPage) ? saveSequence() : visitPage(action.nextPage!); 
 }
 
-
+function saveSequence() {
+    let sequence = [...stack];
+    sequences.push(sequence);
+    stack.pop()
+}
 
 export { generateSequenceUsingTree};
