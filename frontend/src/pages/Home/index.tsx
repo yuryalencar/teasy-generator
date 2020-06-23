@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 import logoImg from '../../assets/teste.png'
 import tutorial from '../../assets/tutorial.svg'
@@ -19,19 +20,25 @@ const Home: React.FC = () => {
             <div className="content-center">
                 <div className="left">
                     <img className="" width="80px" src={paper} alt="brand" />
-                    <h1>Lorem Ipsum</h1>
+                    <h1>You have a Teasy
+JSON</h1>
                     <h3>is simply dummy text of the printing and
                     typesetting industry.
                </h3>
-                    <button type="button" className="btn-l">Lorem</button>
+                    <Link to="/import-teasy-json/" >
+                        <button type="button" className="btn-l">Lorem</button>
+                    </Link>
                 </div>
                 <div className="right">
                     <img className="" width="80px" src={database} alt="img" />
-                    <h1>Lorem Ipsum</h1>
+                    <h1>You have a Tree
+Backup</h1>
                     <h3>is simply dummy text of the printing and
                     typesetting industry.
                </h3>
-                    <button type="button" className="btn-r">Lorem</button>
+                    <Link to="/import-teasy-and-backup" >
+                        <button type="button" className="btn-r">Lorem</button>
+                    </Link>
 
                 </div>
             </div>

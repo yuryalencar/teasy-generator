@@ -60,14 +60,6 @@ body {
  text-align: center;
  display: inline;
 }
-
-.footer {
- padding-left: 10%;
- padding-right: 10%;
- display: flex;
- justify-content: space-between;
-}
-
 .img-l {
  padding-left: 10px;
  margin-right: 999px;
