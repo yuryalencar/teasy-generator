@@ -6,6 +6,37 @@
 }
 
 /* box-sizing: padding anexado na larg e alt, nao somado */
+.letsbtn{
+width: 100%;
+height: auto;
+display: flex;
+justify-content: center;
+ 
+ }
+.letsgo{
+  background-color: rgb(0, 0, 0);
+  cursor: pointer;
+  width: 140px;
+  height: 56px;
+  border: 0;
+  border-radius: 8px;
+  color: #FFF;
+  font-weight: bold;
+  margin-top: 4px;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 60px;
+}
+
+
+
+
+
+
+
+
 
 body {
  font: 400 14px Roboto, sans-serif;
