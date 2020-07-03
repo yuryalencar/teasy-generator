@@ -33,6 +33,7 @@ body {
  padding-left: 10%;
  padding-right: 10%;
  display: flex;
+ flex-direction: column;
  justify-content: space-between;
  align-items: center;
 }
@@ -75,7 +76,8 @@ body {
  color: #FFF;
  font-weight: bold;
  margin-top: 16px;
- display: inline-block;
+ /* display: flex;
+ justify-content: column; */
  text-align: center;
  text-decoration: none;
  font-size: 18px;

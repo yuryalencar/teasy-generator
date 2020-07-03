@@ -1,7 +1,11 @@
 import React from "react";
 
-const ChooseRoot: React.FC = () => {
-    return <h1>Page to choose a root page for mount tree</h1>;
+const ChooseRoot: React.FC = (props: any) => {
+    return (
+        <>
+            <h1>{props.location.state.teasyJson}</h1>;
+        </>
+    );
 }
 
 export default ChooseRoot;
