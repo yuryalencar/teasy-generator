@@ -1,0 +1,41 @@
+[
+    {
+        "name": "First Application Page",
+        "actions": [
+            {
+                "keyword": "Example Keyword",
+                "next_page": null
+            },
+            {
+                "keyword": "Example Keyword 2",
+                "next_page": null
+            }
+        ]
+    },
+    {
+        "name": "Second Application Page",
+        "actions": [
+            {
+                "keyword": "Example Keyword 3",
+                "next_page": null
+            },
+            {
+                "keyword": "Example Keyword 4",
+                "next_page": null
+            }
+        ]
+    },
+    {
+        "name": "Third Application Page",
+        "actions": [
+            {
+                "keyword": "Example Keyword 5",
+                "next_page": null
+            }
+        ]
+    },
+    {
+        "name": "Forth Application Page",
+        "actions": null
+    }
+]

@@ -1,0 +1,38 @@
+{
+	"root":  {
+		"name": "First Application Page",
+		"actions": [
+			{
+				"keyword": "Example Keyword",
+				"nextPage": null
+			},
+			{
+				"keyword": "Example Keyword 2",
+				"nextPage": {
+					"name": "Second Application Page",
+					"actions" : [
+						{
+							"keyword": "Example Keyword 3",
+							"nextPage": {
+								"name": "Third Application Page",
+								"actions" : [
+									{
+										"keyword": "Example Keyword 5",
+										"nextPage": null
+									}
+								]
+							}
+						},
+						{
+							"keyword": "Example Keyword 4",
+							"nextPage": {
+								"name": "Forth Application Page",
+								"actions" : null
+							}
+						}
+					]
+				}
+			}
+		]
+	}
+}
