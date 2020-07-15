@@ -28,7 +28,7 @@ JSON</h1>
                         <button type="button" className="btn-l">Choose</button>
                     </Link>
                 </div>
-                <div className="right">
+                {/* <div className="right">
                     <img className="" width="80px" src={database} alt="img" />
                     <h1>You have a Tree
 Backup</h1>
@@ -38,7 +38,7 @@ Backup</h1>
                         <button type="button" className="btn-r">Choose</button>
                     </Link>
 
-                </div>
+                </div> */}
             </div>
 
             <div className="footer">
