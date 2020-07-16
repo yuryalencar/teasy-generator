@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import logoImg from '../../assets/teste.png'
 import tutorial from '../../assets/tutorial.svg'
 import github from '../../assets/github-icon.svg'
-import database from '../../assets/database-icon.svg'
-import paper from '../../assets/file-icon.svg'
 
 import './styles.css'
 

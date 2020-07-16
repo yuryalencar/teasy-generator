@@ -1,43 +1,25 @@
-import React, { useState } from "react";
-import { Link, Redirect, useHistory } from 'react-router-dom';
+import React from "react";
+import { useHistory } from 'react-router-dom';
+import PageToChooseRoot from "../../components/ChooseRootPage";
 
-const [jsonArray, setJsonArray] = useState([]);
+const ChooseRoot: React.FC = (props: any) => {
 
-const Page: React.FC = (page: any) => {
-
+    const allPages = JSON.parse(props.location.state.teasyJson);
     const history = useHistory();
-    // console.log(page)
-    function thisPage() {
-        const root = page.children
+
+    function chooseThisPage(page: any) {
+        const root = page;
         history.push(
             "/mount-tree",
-            { root, jsonArray }
+            { root, allPages }
         );
     }
 
     return (
-        <div style={{
-            display: "flex", flexDirection: "row", justifyContent: "space-between",
-            alignItems: 'center', paddingLeft: "20px", paddingRight: "20px"
-        }}>
-            <h3>{page.children.name}
-            </h3>
-            <button type="button" onClick={thisPage}  >THIS</button>
-        </div>
-    )
-}
-
-const ChooseRoot: React.FC = (props: any) => {
-
-    const pages = JSON.parse(props.location.state.teasyJson);
-    // setando todo o array
-    setJsonArray(pages)
-    return (
         <>
-            {pages.map((page: any, index: any) => {
-                // getPage(page)
+            {allPages.map((page: any, index: any) => {
                 return (
-                    <Page key={index}>{page}</Page>
+                    <PageToChooseRoot key={index} page={page} callback={chooseThisPage}/>
                 )
             })}
         </>
