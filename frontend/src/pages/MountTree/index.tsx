@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+
+import TreeNodo from '../../components/TreeNodo';
+
+
 
 const MountTree: React.FC = (props: any) => {
-    console.log(props);
+    const root = props.location.state.root
+    const allPages = props.location.state.allPages
+
+    function getComboA(selectObject: any) {
+        var value = selectObject;
+        console.log(allPages[selectObject]);
+    }
+    // console.log(allPages)
     return (
         <>
-            <h1>{props.location.state.root}</h1>;
-            <h1>{props.location.state.allPages}</h1>;
+            <TreeNodo
+                name={root.name}
+                actions={root.actions}
+                pages={allPages}
+                callBack={getComboA}
+            />
         </>
     )
-
 }
 
 export default MountTree;

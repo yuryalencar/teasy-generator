@@ -1,6 +1,6 @@
 import React from "react";
 type Action = {
-    keywords: string,
+    keyword: string,
     next_page: null | Page
 }
 
