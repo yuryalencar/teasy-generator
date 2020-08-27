@@ -1,5 +1,13 @@
 import { createGlobalStyle } from 'styled-components'
 
+const colors = {
+  primary: '#D9D9D9',
+  success: '#4B9A28',
+  light_success: '#F4FFED',
+  secondary: '#0F546E',
+  description: '#707070'
+};
+
 const GlobalStyles = createGlobalStyle`
   *{
   margin: 0;
@@ -19,16 +27,11 @@ const GlobalStyles = createGlobalStyle`
   Roboto, Oxygem, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   overflow: hidden;
   height: 100%;
+  background-color: ${colors.primary};
   }
 `
 
-const colors = {
-  primary: '#D9D9D9',
-  success: '#4B9A28',
-  light_success: '#F4FFED',
-  secondary: '#0F546E',
-  description: '#707070'
-};
+
 
 
 export {GlobalStyles, colors}
