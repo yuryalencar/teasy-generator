@@ -2,7 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 
 const colors = {
   primary: '#D9D9D9',
-  success: '#4B9A28',
+  deactivated: '#cacaca',
+  activated: '#4B9A28',
   light_success: '#F4FFED',
   secondary: '#0F546E',
   description: '#707070'
