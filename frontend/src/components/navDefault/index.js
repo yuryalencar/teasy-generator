@@ -2,6 +2,7 @@ import React from 'react'
 import { ArrowLeftCircle } from 'react-feather'
 import { Nav } from './styles'
 import logo from '../../assets/img/logo_teasy.png'
+import SearchInput from '../search'
 
 const NavDefault = () => {
   
@@ -13,7 +14,7 @@ const NavDefault = () => {
     <Nav>
       <ArrowLeftCircle onClick={() => goBack()}/>
       <img src={logo} alt={'Company Teasy logo'}/>
-      <div></div>
+     <SearchInput className={'input'}/>
     </Nav>
   )
 }
