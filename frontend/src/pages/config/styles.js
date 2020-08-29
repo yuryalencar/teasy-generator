@@ -11,7 +11,7 @@ export const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: ${colors.primary};
- 
+  
 `
 
 export const Wrapper = styled.div`
@@ -26,21 +26,4 @@ export const Wrapper = styled.div`
     resize: none;
     font-family: sans-serif;
   }
-  
-  div{
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    align-content: center;
-    padding: 10px;
-    font-style: italic;
-    font-size: 18px;
-   
-    small{
-     color: ${colors.description};
-     margin-left: 10px;
-    }
-    
-  }
- 
 `

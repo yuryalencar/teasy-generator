@@ -4,18 +4,19 @@ import FooterDefault from '../../components/footerDefault'
 import { useHistory } from 'react-router-dom'
 import { Container, Wrapper } from './styles'
 import { Code } from 'react-feather'
+import Description from '../../components/description'
 
 const Config = () => {
   let history = useHistory()
   
   const redirect = () => {
-    history.push('/select_root')
+    history.push('/selectRoot')
   }
   return (
     <Container>
       <NavDefault/>
       <Wrapper>
-        <div><Code/><small> PASTE ABOVE OF THE TEASY JSON GENERATED</small></div>
+        <Description icon={<Code/>} title={'PASTE ABOVE OF THE TEASY JSON GENERATED'}/>
         <textarea/>
       </Wrapper>
       <FooterDefault title={'LET´S GO'} action={redirect}/>

@@ -7,8 +7,7 @@ export const WrapperInput = styled.div`
   justify-items: center;
   align-items: center;
   align-content: center;
-  width: 20%;
-  min-width: 200px;
+  min-width: 250px;
   
   svg{
     margin-left: -40px;

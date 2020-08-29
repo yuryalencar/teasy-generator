@@ -12,9 +12,9 @@ const NavDefault = () => {
   
   return (
     <Nav>
-      <ArrowLeftCircle onClick={() => goBack()}/>
-      <img src={logo} alt={'Company Teasy logo'}/>
-     <SearchInput className={'input'}/>
+      <div className={'icon'}><ArrowLeftCircle onClick={() => goBack()}/></div>
+      <div className={'logo'}><img src={logo} alt={'Company Teasy logo'}/></div>
+      <div className={'input'}><SearchInput/></div>
     </Nav>
   )
 }

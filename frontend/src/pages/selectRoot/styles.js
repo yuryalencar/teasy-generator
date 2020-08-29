@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { colors } from '../../styles/global'
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +10,7 @@ export const Container = styled.div`
   height: 100vh;
 `
 
-export const Wrapper = styled.div`
+export const WrapperBody = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -19,5 +18,14 @@ export const Wrapper = styled.div`
   padding: 20px;
   flex-wrap: nowrap;
   overflow: auto;
+`
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding-right: 10px;
+  flex-wrap: nowrap;
+  overflow: auto;
 `
