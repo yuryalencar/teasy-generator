@@ -7,6 +7,7 @@ import Description from '../../components/description'
 import { GitBranch, GitCommit, GitMerge } from 'react-feather'
 import ActionTree from '../../components/makeTreeAction'
 import Divider from '../../components/divider'
+import Node from "../../components/node";
 
 const MakeTree = () => {
   let history = useHistory()
@@ -30,7 +31,8 @@ const MakeTree = () => {
           <ActionTree title={'HOME PAGE'}/>
           <ActionTree title={'HOME PAGE'}/>
           <ActionTree title={'HOME PAGE'}/>
-          <Divider/>
+         
+          <Node/>
         </Wrapper>
       </WrapperBody>
       <FooterDefault title={'LET´S GO'} action={redirect}/>

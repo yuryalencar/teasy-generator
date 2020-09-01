@@ -9,7 +9,6 @@ export const Action = styled.div`
   background-color: white;
   padding: 15px;
   margin-top: 2px;
-  
 `
 export const ActionTitle = styled.div`
   display: flex;

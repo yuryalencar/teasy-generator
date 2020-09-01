@@ -13,8 +13,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route path="/config" component={Config}/>
-        <Route path="/select_root" component={SelectRoot}/>
-        <Route path="/make_tree" component={MakeTree}/>
+        <Route path="/selectRoot" component={SelectRoot}/>
+        <Route path="/makeTree" component={MakeTree}/>
       </Switch>
     </Router>
   )
