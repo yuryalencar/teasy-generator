@@ -1,6 +1,15 @@
-import { useToasts } from 'react-toast-notifications'
-const { addToast } = useToasts()
+import React from 'react';
+import {toast} from 'react-toastify';
 
-export const Toast = (content) =>  addToast(content, { appearance: 'error', autoDismiss: true})
-
-
+export const toastSuccess = (message) => {
+  toast.success(message,  {position: 'bottom-right'});
+};
+export const toastWarning = (message) => {
+  toast.warn(message,  {position: 'bottom-right'});
+};
+export const toastError = (message) => {
+  toast.error(message,  {position: 'top-right'});
+};
+export const toastInfo = (message) => {
+  toast.info(message,  {position: 'top-right'});
+};

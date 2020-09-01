@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Container, Header, Wrapper, WrapperBody } from './styles'
 import NavDefault from '../../components/navDefault'
 import FooterDefault from '../../components/footerDefault'
@@ -8,8 +8,10 @@ import { GitBranch, GitCommit, GitMerge } from 'react-feather'
 import ActionTree from '../../components/makeTreeAction'
 import Divider from '../../components/divider'
 import Node from "../../components/node";
+import {JsonContext} from "../../context";
 
 const MakeTree = () => {
+  const {pages, tree} = useContext(JsonContext)
   let history = useHistory()
   
   const redirect = () => {
@@ -24,13 +26,16 @@ const MakeTree = () => {
           <Header>
             <GitMerge/>
             <div>
-              <h3>PAGINA HOME</h3>
+              <h3>{tree.root.name}</h3>
               <small>Define the children of the routes to be applied</small>
             </div>
           </Header>
-          <ActionTree title={'HOME PAGE'}/>
-          <ActionTree title={'HOME PAGE'}/>
-          <ActionTree title={'HOME PAGE'}/>
+          {tree && tree.root.actions.map((action, i ) => {
+            return(
+                <ActionTree key={i} title={action.keyword}/>
+            )
+          })}
+
          
           <Node/>
         </Wrapper>

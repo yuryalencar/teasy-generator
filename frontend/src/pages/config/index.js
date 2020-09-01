@@ -1,23 +1,27 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import NavDefault from '../../components/navDefault'
 import FooterDefault from '../../components/footerDefault'
-import { useHistory } from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import { Container, Wrapper } from './styles'
 import { Code } from 'react-feather'
 import Description from '../../components/description'
-import { ToastProvider, useToasts } from 'react-toast-notifications'
+import {toastError} from "../../components/toast";
+import {JsonContext} from "../../context";
 
 const Config = () => {
   const [json, setJson] = useState('')
+  const {setPage } = useContext(JsonContext)
   let history = useHistory()
   
   const validate = () => {
-    if (json.trim().length > 0 ) return true
+    if (json.trim().length > 0 ) {
+      setPage(JSON.parse(json))
+      return true
+    }
+    toastError('Compo não pode ser em branco')
   }
-  const { addToast } = useToasts()
+ 
   const redirect = () => {
-
-    addToast('Saved Successfully', { appearance: 'success' })
     validate() && history.push('/selectRoot')
   }
   return (
