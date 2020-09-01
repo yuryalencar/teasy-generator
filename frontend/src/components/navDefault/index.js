@@ -4,7 +4,7 @@ import { Nav } from './styles'
 import logo from '../../assets/img/logo_teasy.png'
 import SearchInput from '../search'
 
-const NavDefault = () => {
+const NavDefault = ({status}) => {
   
   function goBack() {
     window.history.back()
@@ -14,7 +14,7 @@ const NavDefault = () => {
     <Nav>
       <div className={'icon'}><ArrowLeftCircle onClick={() => goBack()}/></div>
       <div className={'logo'}><img src={logo} alt={'Company Teasy logo'}/></div>
-      <div className={'input'}><SearchInput/></div>
+      <div className={'input'}>{status && <SearchInput/>}</div>
     </Nav>
   )
 }
