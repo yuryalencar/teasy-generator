@@ -1,16 +1,15 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import { GitCommit } from 'react-feather'
 import InputSelect from '../inputSelect'
 import { Action, ActionIcon, ActionTitle } from './styles'
-import {JsonContext} from "../../context";
 
-const ActionTree = ({title}) => {
+const ActionTree = ({ keyword }) => {
 
   return (
     <Action>
-      <ActionTitle>{title}</ActionTitle>
-      <ActionIcon><GitCommit/></ActionIcon>
-      <InputSelect/>
+      <ActionTitle>{keyword}</ActionTitle>
+      <ActionIcon><GitCommit /></ActionIcon>
+      <InputSelect keyword={keyword} />
     </Action>
   )
 }
