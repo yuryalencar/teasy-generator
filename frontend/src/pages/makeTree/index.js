@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { Container, Header, Wrapper, WrapperBody } from './styles'
 import NavDefault from '../../components/navDefault'
 import FooterDefault from '../../components/footerDefault'
@@ -8,39 +8,37 @@ import { GitBranch, GitCommit, GitMerge } from 'react-feather'
 import ActionTree from '../../components/makeTreeAction'
 import Divider from '../../components/divider'
 import Node from "../../components/node";
-import {JsonContext} from "../../context";
+import { JsonContext } from "../../context";
 
 const MakeTree = () => {
-  const {pages, tree} = useContext(JsonContext)
+  const { pages, tree } = useContext(JsonContext)
   let history = useHistory()
-  
+
   const redirect = () => {
     history.push('/makeTree')
   }
   return (
     <Container>
-      <NavDefault/>
+      <NavDefault />
       <WrapperBody>
-        <Description icon={<GitBranch/>} title={'INSERT A NEW PAGE MAKING A RELATIONSHIP WITH ACTIONS'}/>
+        <Description icon={<GitBranch />} title={'INSERT A NEW PAGE MAKING A RELATIONSHIP WITH ACTIONS'} />
         <Wrapper>
           <Header>
-            <GitMerge/>
+            <GitMerge />
             <div>
               <h3>{tree.root.name}</h3>
               <small>Define the children of the routes to be applied</small>
             </div>
           </Header>
-          {tree && tree.root.actions.map((action, i ) => {
-            return(
-                <ActionTree key={i} title={action.keyword}/>
+          {tree && tree.root.actions.map((action, i) => {
+            return (
+              <ActionTree key={i} keyword={action.keyword} />
             )
           })}
-
-         
-          <Node/>
+          {/* <Node /> */}
         </Wrapper>
       </WrapperBody>
-      <FooterDefault title={'LET´S GO'} action={redirect}/>
+      <FooterDefault title={'LET´S GO'} action={redirect} />
     </Container>
   )
 }
