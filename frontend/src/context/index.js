@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react'
-import { saveContext, loadContext } from './saveContext';
+import { saveContext, loadContext } from './persistContext';
 
 const applicationContext = loadContext()
 
@@ -23,7 +23,10 @@ const JsonProvider = ({ children }) => {
     setTree({ ...tree, root })
   }
 
-  const onChangePage = (page) => {
+  const onChangePage = ({ currentPage, keyword, nextPage }) => {
+    console.log('currentPage', currentPage);
+    console.log('keyword', keyword);
+    console.log('nextPage', nextPage);
     //  const newActions =  {
     //    ...tree.root.actions
     //   }
