@@ -19,7 +19,7 @@ const SelectRoot = () => {
 	  insertRoot({root: pages[status]})
 	  return true
 	}
-	toastError('Compo não pode ser em branco')
+    toastError('This field is required')
   }
   
   const redirect = () => {

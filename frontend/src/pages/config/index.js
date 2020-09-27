@@ -10,7 +10,7 @@ import {JsonContext} from "../../context";
 
 const Config = () => {
   const [json, setJson] = useState('')
-  const {setPage } = useContext(JsonContext)
+  const { setPage } = useContext(JsonContext)
   let history = useHistory()
   
   const validate = () => {
@@ -18,7 +18,7 @@ const Config = () => {
       setPage(JSON.parse(json))
       return true
     }
-    toastError('Compo não pode ser em branco')
+    toastError('This field is required')
   }
  
   const redirect = () => {

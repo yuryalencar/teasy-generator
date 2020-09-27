@@ -1,20 +1,21 @@
 import React from 'react';
 import ActionTree from "../makeTreeAction";
-import { Wrapper } from "../../pages/makeTree/styles";
 import { GitCommit } from "react-feather";
 import Divider from "../divider";
-import { ActionIcon, Container, NodeIcon, NodeTitle, WrapperTitle } from "./styles";
+import { Container, NodeIcon, NodeTitle, WrapperTitle } from "./styles";
 
-const Node = () => {
+const Node = ({tree_path, page}) => {
 	return (
 		<Container>
 			<Divider />
 			<WrapperTitle>
-				<NodeTitle>HOME PAGE</NodeTitle>
+				<NodeTitle>{tree_path}</NodeTitle>
 				<NodeIcon><GitCommit /></NodeIcon>
-				<NodeTitle color={true}>HOME PAGE</NodeTitle>
+				<NodeTitle color="true">{page.name.toUpperCase()}</NodeTitle>
 			</WrapperTitle>
-			<ActionTree keyword={'HOME PAGE'} />
+			{
+            	page.actions?.map((action, i) => <ActionTree key={i} keyword={action.keyword} /> )
+          	}
 		</Container>
 	);
 };

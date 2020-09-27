@@ -1,26 +1,32 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { FormGroup, InputGroup, InputIcone } from './styles'
 import { Hexagon } from 'react-feather'
-import { JsonContext } from "../../context";
+import { JsonContext } from '../../context'
 
-const InputSelect = ({ keyword }) => {
+const InputSelect = ({ keyword, tree_path }) => {
   const { pages, onChangePage } = useContext(JsonContext)
 
   return (
     <FormGroup>
       <InputGroup>
         <InputIcone>{<Hexagon />}</InputIcone>
-        <select className="form-control" onChange={(e) => onChangePage({
-          currentPage: null,
-          keyword: keyword,
-          nextPage: pages[e.target.value]
-        })}>
-          <option value={null} selected>Selecione uma opção</option>
-          {pages.map((page, i) => {
-            return (<option key={i} value={i}>{page.name}</option>)
-          })}
+        <select
+          className='form-control'
+          onChange={(e) =>
+            onChangePage({
+              currentPage: tree_path,
+              keyword: keyword,
+              nextPage: pages[e.target.value],
+            })
+          }
+        >
+          <option value={{}}>Selecione uma opção</option>
+          {pages.map((page, i) => (
+            <option key={i} value={i}>
+              {page.name}
+            </option>
+          ))}
         </select>
-
       </InputGroup>
     </FormGroup>
   )

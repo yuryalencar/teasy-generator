@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom'
+import { JsonContext } from "../../context";
 import { Container, Header, Wrapper, WrapperBody } from './styles'
+import { GitBranch, GitMerge } from 'react-feather'
+
 import NavDefault from '../../components/navDefault'
 import FooterDefault from '../../components/footerDefault'
-import { useHistory } from 'react-router-dom'
 import Description from '../../components/description'
-import { GitBranch, GitCommit, GitMerge } from 'react-feather'
 import ActionTree from '../../components/makeTreeAction'
-import Divider from '../../components/divider'
 import Node from "../../components/node";
-import { JsonContext } from "../../context";
 
 const MakeTree = () => {
-  const { pages, tree } = useContext(JsonContext)
+  const { tree } = useContext(JsonContext)
   let history = useHistory()
 
   const redirect = () => {
@@ -30,12 +30,10 @@ const MakeTree = () => {
               <small>Define the children of the routes to be applied</small>
             </div>
           </Header>
-          {tree && tree.root.actions.map((action, i) => {
-            return (
-              <ActionTree key={i} keyword={action.keyword} />
-            )
-          })}
-          {/* <Node /> */}
+          {
+            tree.root.actions?.map((action, i) => <ActionTree key={i} tree_path={[]} keyword={action.keyword} /> )
+          }
+          <Node page={tree.root} tree_path={"EXAMPLE"}/>
         </Wrapper>
       </WrapperBody>
       <FooterDefault title={'LET´S GO'} action={redirect} />
