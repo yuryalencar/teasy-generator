@@ -23,16 +23,41 @@ const JsonProvider = ({ children }) => {
     setTree({ ...tree, root })
   }
 
-  const onChangePage = ({ currentPage, keyword, nextPage }) => {
-    console.log('currentPage', currentPage);
-    console.log('keyword', keyword);
-    console.log('nextPage', nextPage);
-    //  const newActions =  {
-    //    ...tree.root.actions
-    //   }
+  const onChangePage = ({ treePath, keyword, nextPage }) => {
 
-    //   console.log(newActions.find(({keyword}) => keyword === 'Example Keyword 2'))
-    //   console.log('pages', page)
+    const treeUpdated = insertPageInTree({
+      tree: {...tree},
+      treePath,
+      keyword,
+      nextPage: nextPage
+    });
+
+    setTree(treeUpdated);
+  }
+
+  const findActionByKeyword = ({ treePath, keyword, page }) => {
+    const inPath = treePath.length > 0;
+    const actualKeyword = inPath ? treePath.shift() : keyword;
+
+    if(page.actions === null || page.actions === undefined){ return }
+    
+    let actionFinded = page.actions.find(( action ) => action.keyword === actualKeyword );
+
+    if(inPath) { findActionByKeyword({ treePath, keyword, page: actionFinded.next_page });}
+    else { return actionFinded; }
+  }
+
+  const insertPageInTree = ({ tree, treePath, keyword, nextPage }) => {
+    
+    let action = findActionByKeyword({
+      treePath,
+      keyword,
+      page: tree.root
+    });
+
+    nextPage === undefined ? action.next_page = null : action.next_page = nextPage;
+    
+    return tree;
   }
 
   return (

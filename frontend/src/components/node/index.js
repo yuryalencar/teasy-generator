@@ -4,17 +4,17 @@ import { GitCommit } from "react-feather";
 import Divider from "../divider";
 import { Container, NodeIcon, NodeTitle, WrapperTitle } from "./styles";
 
-const Node = ({tree_path, page}) => {
+const Node = ({treePath, page}) => {
 	return (
 		<Container>
 			<Divider />
 			<WrapperTitle>
-				<NodeTitle>{tree_path}</NodeTitle>
+				<NodeTitle>{treePath}</NodeTitle>
 				<NodeIcon><GitCommit /></NodeIcon>
 				<NodeTitle color="true">{page.name.toUpperCase()}</NodeTitle>
 			</WrapperTitle>
 			{
-            	page.actions?.map((action, i) => <ActionTree key={i} keyword={action.keyword} /> )
+            	page.actions?.map((action, i) => <ActionTree key={i} treePath={[]} keyword={action.keyword} /> )
           	}
 		</Container>
 	);

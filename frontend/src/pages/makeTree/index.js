@@ -31,9 +31,9 @@ const MakeTree = () => {
             </div>
           </Header>
           {
-            tree.root.actions?.map((action, i) => <ActionTree key={i} tree_path={[]} keyword={action.keyword} /> )
+            tree.root.actions?.map((action, i) => <ActionTree key={i} treePath={[]} keyword={action.keyword} /> )
           }
-          <Node page={tree.root} tree_path={"EXAMPLE"}/>
+          <Node page={tree.root} treePath={"EXAMPLE"}/>
         </Wrapper>
       </WrapperBody>
       <FooterDefault title={'LET´S GO'} action={redirect} />

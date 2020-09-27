@@ -3,7 +3,7 @@ import { FormGroup, InputGroup, InputIcone } from './styles'
 import { Hexagon } from 'react-feather'
 import { JsonContext } from '../../context'
 
-const InputSelect = ({ keyword, tree_path }) => {
+const InputSelect = ({ keyword, treePath }) => {
   const { pages, onChangePage } = useContext(JsonContext)
 
   return (
@@ -14,7 +14,7 @@ const InputSelect = ({ keyword, tree_path }) => {
           className='form-control'
           onChange={(e) =>
             onChangePage({
-              currentPage: tree_path,
+              treePath: treePath,
               keyword: keyword,
               nextPage: pages[e.target.value],
             })
