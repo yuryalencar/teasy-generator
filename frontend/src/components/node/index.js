@@ -14,7 +14,7 @@ const Node = ({treePath, page}) => {
 				<NodeTitle color="true">{page.name.toUpperCase()}</NodeTitle>
 			</WrapperTitle>
 			{
-            	page.actions?.map((action, i) => <ActionTree key={i} treePath={[]} keyword={action.keyword} /> )
+            	page.actions?.map((action, i) => <ActionTree key={i} treePath={[...treePath]} keyword={action.keyword} /> )
           	}
 		</Container>
 	);

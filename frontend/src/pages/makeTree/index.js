@@ -11,7 +11,7 @@ import ActionTree from '../../components/makeTreeAction'
 import Node from "../../components/node";
 
 const MakeTree = () => {
-  const { tree } = useContext(JsonContext)
+  const { tree, nodes } = useContext(JsonContext)
   let history = useHistory()
 
   const redirect = () => {
@@ -33,7 +33,9 @@ const MakeTree = () => {
           {
             tree.root.actions?.map((action, i) => <ActionTree key={i} treePath={[]} keyword={action.keyword} /> )
           }
-          <Node page={tree.root} treePath={"EXAMPLE"}/>
+          {
+            nodes.map((node, i) => <Node page={node.page} key={i} treePath={node.treePath}/> )
+          }
         </Wrapper>
       </WrapperBody>
       <FooterDefault title={'LET´S GO'} action={redirect} />

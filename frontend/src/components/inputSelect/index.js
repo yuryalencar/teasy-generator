@@ -16,7 +16,7 @@ const InputSelect = ({ keyword, treePath }) => {
             onChangePage({
               treePath: treePath,
               keyword: keyword,
-              nextPage: pages[e.target.value],
+              nextPage: {...pages[e.target.value]},
             })
           }
         >
