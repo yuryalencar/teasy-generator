@@ -1,11 +1,12 @@
 import React, { createContext, useState, useEffect } from 'react'
+import { createNodeToShow, createPage } from './useTree'
 import { saveContext, loadContext } from './persistContext';
 
 const applicationContext = loadContext()
 
 const JsonContext = createContext(null)
 const initialRoot = applicationContext ? applicationContext.tree.root : null
-const initialPages = applicationContext ? applicationContext.pages : null
+const initialPages = applicationContext ? applicationContext.pages : []
 const initialNodes = applicationContext ? applicationContext.nodes : []
 
 const initialTree = {
@@ -19,33 +20,19 @@ const JsonProvider = ({ children }) => {
 
   useEffect(() => {
     saveContext({ pages, tree, nodes })
-  }, [pages, tree, nodes])
+  }, [ tree, nodes, pages ])
 
-  const insertRoot = ({ root }) => {
-    setTree({ ...tree, root })
-  }
+  const insertRoot = ({ root }) => setTree({ ...tree, root: createPage(root) })
 
   const onChangePage = ({ treePath, keyword, nextPage }) => {
     const treeUpdated = insertPageInTree({
-      tree: {...tree},
+      tree,
       treePath,
       keyword,
-      nextPage: {...nextPage}
+      nextPage
     });
 
     setTree(treeUpdated);
-  }
-
-  const findActionByKeyword = ({ treePath, keyword, page }) => {
-    const inPath = treePath.length > 0;
-    const actualKeyword = inPath ? treePath.shift() : keyword;
-
-    if(page.actions === null || page.actions === undefined){ return }
-    
-    let actionFinded = page.actions.find(( action ) => action.keyword === actualKeyword );
-
-    if(inPath) { return findActionByKeyword({ treePath:[...treePath], keyword, page: actionFinded.next_page });}
-    else { return actionFinded; }
   }
 
   const insertPageInTree = ({ tree, treePath, keyword, nextPage }) => {
@@ -53,24 +40,36 @@ const JsonProvider = ({ children }) => {
     let action = findActionByKeyword({
       treePath: [...treePath],
       keyword,
-      page: tree.root
+      actualPage: tree.root,
     });
 
-    nextPage.name === undefined ? action.next_page = null : action.next_page = {...nextPage};
-    nextPage.name === undefined ? removeNodes({treePath, keyword}) : insertNode({page: nextPage, treePath, keyword});
+    nextPage.name === undefined ? action.next_page = null : action.next_page = createPage(nextPage);
+    nextPage.name === undefined ? removeNodes({treePath: [...treePath, keyword]}) : insertNode({page: createPage(nextPage), treePath: [...treePath, keyword]});
 
     return tree;
   }
 
-  const insertNode = ({ page, treePath, keyword}) => {
-    treePath.push(keyword);
-    
-    let node = {
-      page,
-      treePath: treePath
-    }
+  const findActionByKeyword = ({ treePath, keyword, actualPage }) => {
+    const inPath = treePath.length > 0;
+    const actualKeyword = inPath ? treePath.shift() : keyword;
 
-    setNodes([...nodes, node]);
+    if(actualPage.actions === null || actualPage.actions === undefined){ return }
+    
+    let actionFinded = actualPage.actions.find(( action ) => action.keyword === actualKeyword );
+
+    if(inPath) { return findActionByKeyword({ treePath, keyword, actualPage: actionFinded.next_page });}
+    else { return actionFinded; }
+  }
+
+  const insertNode = ({ page, treePath}) => {
+    removeNodes({ treePath })
+
+    setNodes([...nodes, createNodeToShow({ page, treePath })])
+  }
+
+  const removeNodes = ({ treePath }) => {
+    let validNodes = nodes.filter((node) => isValidNode(node, treePath));
+    setNodes(validNodes);
   }
 
   const isValidNode = (node, treeFullPath) => {
@@ -91,14 +90,8 @@ const JsonProvider = ({ children }) => {
     return isValid;
   }
 
-  const removeNodes = ({ treePath, keyword }) => {
-    treePath.push(keyword);
-    let validNodes = nodes.filter((node) => isValidNode(node, treePath));
-    setNodes(validNodes);
-  }
-
   return (
-    <JsonContext.Provider value={{ pages, setPage, tree, setTree, insertRoot, onChangePage, nodes }}>
+    <JsonContext.Provider value={{ pages: Object.assign([], pages), setPage, tree : Object.assign({}, tree), insertRoot, onChangePage, nodes: Object.assign([], nodes) }}>
       {children}
     </JsonContext.Provider>
   )
