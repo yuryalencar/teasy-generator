@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { createNodeToShow, createPage } from './useTree'
-import { saveContext, loadContext } from './persistContext';
+import { saveContext, loadContext } from './persistContext'
 
 const applicationContext = loadContext()
 
@@ -10,7 +10,7 @@ const initialPages = applicationContext ? applicationContext.pages : []
 const initialNodes = applicationContext ? applicationContext.nodes : []
 
 const initialTree = {
-  root: initialRoot
+  root: initialRoot,
 }
 
 const JsonProvider = ({ children }) => {
@@ -20,78 +20,111 @@ const JsonProvider = ({ children }) => {
 
   useEffect(() => {
     saveContext({ pages, tree, nodes })
-  }, [ tree, nodes, pages ])
+  }, [tree, nodes, pages])
 
   const insertRoot = ({ root }) => setTree({ ...tree, root: createPage(root) })
 
-  const onChangePage = ({ treePath, keyword, nextPage }) => {
+  const onChangePage = ({ treePath, keyword, nextPage, actualNode, optionIndex, isRoot }) => {
     const treeUpdated = insertPageInTree({
       tree,
       treePath,
       keyword,
-      nextPage
-    });
+      nextPage,
+    })
 
-    setTree(treeUpdated);
+    setTree(treeUpdated)
+    if(!isRoot && actualNode && actualNode.actions){
+      actualNode.actions.find((action) => action.keyword === keyword).next_page = optionIndex
+    }
   }
 
-  const insertPageInTree = ({ tree, treePath, keyword, nextPage }) => {
-
+  const insertPageInTree = ({
+    tree,
+    treePath,
+    keyword,
+    nextPage,
+  }) => {
     let action = findActionByKeyword({
       treePath: [...treePath],
       keyword,
       actualPage: tree.root,
-    });
+    })
 
-    nextPage.name === undefined ? action.next_page = null : action.next_page = createPage(nextPage);
-    nextPage.name === undefined ? removeNodes({treePath: [...treePath, keyword]}) : insertNode({page: createPage(nextPage), treePath: [...treePath, keyword]});
+    nextPage.name === undefined
+      ? (action.next_page = null)
+      : (action.next_page = createPage(nextPage))
+    nextPage.name === undefined
+      ? removeNodes({ treePath: [...treePath, keyword] })
+      : insertNode({
+          page: createPage(nextPage),
+          treePath: [...treePath, keyword],
+        })
 
-    return tree;
+    return tree
   }
 
   const findActionByKeyword = ({ treePath, keyword, actualPage }) => {
-    const inPath = treePath.length > 0;
-    const actualKeyword = inPath ? treePath.shift() : keyword;
+    const inPath = treePath.length > 0
+    const actualKeyword = inPath ? treePath.shift() : keyword
 
-    if(actualPage.actions === null || actualPage.actions === undefined){ return }
-    
-    let actionFinded = actualPage.actions.find(( action ) => action.keyword === actualKeyword );
+    if (actualPage.actions === null || actualPage.actions === undefined) {
+      return
+    }
 
-    if(inPath) { return findActionByKeyword({ treePath, keyword, actualPage: actionFinded.next_page });}
-    else { return actionFinded; }
+    let actionFinded = actualPage.actions.find(
+      (action) => action.keyword === actualKeyword
+    )
+
+    if (inPath) {
+      return findActionByKeyword({
+        treePath,
+        keyword,
+        actualPage: actionFinded.next_page,
+      })
+    } else {
+      return actionFinded
+    }
   }
 
-  const insertNode = ({ page, treePath}) => {
+  const insertNode = ({ page, treePath }) => {
     removeNodes({ treePath })
 
     setNodes([...nodes, createNodeToShow({ page, treePath })])
   }
 
   const removeNodes = ({ treePath }) => {
-    let validNodes = nodes.filter((node) => isValidNode(node, treePath));
-    setNodes(validNodes);
+    let validNodes = nodes.filter((node) => isValidNode(node, treePath))
+    setNodes(validNodes)
   }
 
   const isValidNode = (node, treeFullPath) => {
+    let isValid = true
 
-    let isValid = true;
-
-    if(node.treePath.length < treeFullPath.length) {
-      return isValid;
+    if (node.treePath.length < treeFullPath.length) {
+      return isValid
     }
-  
+
     for (let index = 0; index < treeFullPath.length; index++) {
-      if(node.treePath[index] !== treeFullPath[index]){
-        return isValid;
+      if (node.treePath[index] !== treeFullPath[index]) {
+        return isValid
       }
     }
 
-    isValid = false;
-    return isValid;
+    isValid = false
+    return isValid
   }
 
   return (
-    <JsonContext.Provider value={{ pages: Object.assign([], pages), setPage, tree : Object.assign({}, tree), insertRoot, onChangePage, nodes: Object.assign([], nodes) }}>
+    <JsonContext.Provider
+      value={{
+        pages: Object.assign([], pages),
+        setPage,
+        tree: Object.assign({}, tree),
+        insertRoot,
+        onChangePage,
+        nodes: Object.assign([], nodes),
+      }}
+    >
       {children}
     </JsonContext.Provider>
   )
