@@ -4,13 +4,19 @@ import { ButtonDefault } from '../button/buttonDefault'
 import github from '../../assets/img/github.svg'
 import { Footer } from './styles'
 
-const FooterDefault = ({title, action}) => {
-  
+const FooterDefault = ({ title, action }) => {
   return (
     <Footer>
-      <img src={learn} alt={'Learning about Teasy'}/>
+      <img src={learn} alt={'Learning about Teasy'} />
       {action && <ButtonDefault onClick={action}>{title}</ButtonDefault>}
-      <img src={github} alt={'Company GitHub logo'}/>
+
+      <img
+        src={github}
+        onClick={() =>
+          window.open('https://github.com/yuryalencar/TeasyGenerator')
+        }
+        alt={'Company GitHub logo'}
+      />
     </Footer>
   )
 }
