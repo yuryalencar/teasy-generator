@@ -12,7 +12,7 @@ interface IPage {
 
 interface IAction {
     keyword: string;
-    nextPage: IPage | null;
+    next_page: IPage | null;
 }
 
 const createTree = ( bodyTree : ITree ) => {
@@ -46,19 +46,19 @@ const createPage = ({ name, actions } : IPage) => {
     return page;
 }
 
-const createAction = ({ keyword, nextPage } : IAction) => {
+const createAction = ({ keyword, next_page } : IAction) => {
 
-    if(isNull(keyword) || isUndefined(keyword) || isUndefined(nextPage)){
+    if(isNull(keyword) || isUndefined(keyword) || isUndefined(next_page)){
         throw ("Body informed is an invalid tree");
     }
 
-    if(!isNull(nextPage)){
-        createPage(nextPage!);
+    if(!isNull(next_page)){
+        createPage(next_page!);
     }
 
     const action = {
         keyword,
-        nextPage
+        next_page
     }
 
     return action;

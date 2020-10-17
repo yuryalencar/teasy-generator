@@ -30,7 +30,7 @@ function visitPage( page: IPage ){
 function visitAction( action: IAction ){
     
     stack.push(action.keyword);
-    isNull(action.nextPage) ? saveSequence() : visitPage(action.nextPage!); 
+    isNull(action.next_page) ? saveSequence() : visitPage(action.next_page!); 
 }
 
 function saveSequence() {

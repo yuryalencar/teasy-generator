@@ -1,5 +1,6 @@
 import { Application } from "https://deno.land/x/oak/mod.ts";
-import { APP_PORT, APP_HOST } from "./config.ts";
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
+import { APP_PORT, APP_HOST, FRONTEND_HOST } from "./config.ts";
 import router from "./routes.ts";
 
 console.log("→ Starting Teasy Generator Backend 🦕");
@@ -8,6 +9,7 @@ const application = new Application();
 
 console.log("→ Setting server and routes ⚙️ ");
 
+application.use(oakCors({ origin: FRONTEND_HOST }))
 application.use(router.routes());
 application.use(router.allowedMethods());
 
