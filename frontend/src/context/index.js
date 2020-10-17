@@ -24,7 +24,14 @@ const JsonProvider = ({ children }) => {
 
   const insertRoot = ({ root }) => setTree({ ...tree, root: createPage(root) })
 
-  const onChangePage = ({ treePath, keyword, nextPage, actualNode, optionIndex, isRoot }) => {
+  const onChangePage = ({
+    treePath,
+    keyword,
+    nextPage,
+    actualNode,
+    optionIndex,
+    isRoot,
+  }) => {
     const treeUpdated = insertPageInTree({
       tree,
       treePath,
@@ -33,17 +40,14 @@ const JsonProvider = ({ children }) => {
     })
 
     setTree(treeUpdated)
-    if(!isRoot && actualNode && actualNode.actions){
-      actualNode.actions.find((action) => action.keyword === keyword).next_page = optionIndex
+    if (!isRoot && actualNode && actualNode.actions) {
+      actualNode.actions.find(
+        (action) => action.keyword === keyword
+      ).next_page = optionIndex
     }
   }
 
-  const insertPageInTree = ({
-    tree,
-    treePath,
-    keyword,
-    nextPage,
-  }) => {
+  const insertPageInTree = ({ tree, treePath, keyword, nextPage }) => {
     let action = findActionByKeyword({
       treePath: [...treePath],
       keyword,
@@ -53,6 +57,7 @@ const JsonProvider = ({ children }) => {
     nextPage.name === undefined
       ? (action.next_page = null)
       : (action.next_page = createPage(nextPage))
+
     nextPage.name === undefined
       ? removeNodes({ treePath: [...treePath, keyword] })
       : insertNode({
@@ -86,15 +91,15 @@ const JsonProvider = ({ children }) => {
     }
   }
 
-  const insertNode = ({ page, treePath }) => {
-    removeNodes({ treePath })
-
-    setNodes([...nodes, createNodeToShow({ page, treePath })])
+  const insertNode = ({ page, treePath }) =>{
+    setNodes([
+      ...nodes.filter((node) => isValidNode(node, treePath)),
+      createNodeToShow({ page, treePath }),
+    ])
   }
 
   const removeNodes = ({ treePath }) => {
-    let validNodes = nodes.filter((node) => isValidNode(node, treePath))
-    setNodes(validNodes)
+    setNodes(nodes.filter((node) => isValidNode(node, treePath)))
   }
 
   const isValidNode = (node, treeFullPath) => {

@@ -3,6 +3,7 @@ import { FormGroup, InputGroup, InputIcone } from './styles'
 import { Hexagon } from 'react-feather'
 import { JsonContext } from '../../context'
 
+// START: Methods for when to refresh the screen the options are selected
 const getOption = ({ isRoot, keyword, actualNode, pages }) =>
   isRoot
     ? getRootOption({ keyword, root: actualNode, pages })
@@ -30,6 +31,7 @@ const getNodeOption = ({ keyword, node }) => {
 
   return option ? option : {}
 }
+// END: Methods for when to refresh the screen the options are selected
 
 const InputSelect = ({ keyword, treePath, actualNode, isRoot }) => {
   const { pages, onChangePage } = useContext(JsonContext)
@@ -60,7 +62,7 @@ const InputSelect = ({ keyword, treePath, actualNode, isRoot }) => {
             setOptionSelected(e.target.value)
           }}
         >
-          <option value={null}>Selecione uma opção</option>
+          <option value={null}>Select the next page / Clear</option>
           {pages.map((page, i) => (
             <option key={i} value={i}>
               {page.name}
