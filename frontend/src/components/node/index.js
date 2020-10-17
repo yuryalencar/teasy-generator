@@ -9,7 +9,7 @@ const Node = ({ treePath, page }) => {
     <Container>
       <Divider />
       <WrapperTitle>
-        <NodeTitle>{treePath}</NodeTitle>
+        <NodeTitle>{treePath.map((keyword) => keyword + ' > ')}</NodeTitle>
         <NodeIcon>
           <GitCommit />
         </NodeIcon>
@@ -20,8 +20,8 @@ const Node = ({ treePath, page }) => {
           key={i}
           treePath={[...treePath]}
           keyword={action.keyword}
-		  actualNode={page}
-		  isRoot={false}
+          actualNode={page}
+          isRoot={false}
         />
       ))}
     </Container>
