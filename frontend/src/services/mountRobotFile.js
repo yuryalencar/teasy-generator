@@ -17,6 +17,7 @@ const testFile = {
 }
 
 const mountRobotFile = ({ testSequences, filename }) => {
+    resetParams()
     testSequences.forEach(sequence => {
         testFile.test_cases += createTestCase(sequence) + "\n"
     });
@@ -45,5 +46,10 @@ const mountTestFile = () => (
     testFile.test_cases_section +
     testFile.test_cases
 )
+
+const resetParams = () => {
+    testFile.test_cases = ""
+    amountTestsGenerated = 0
+}
 
 export { mountRobotFile }
