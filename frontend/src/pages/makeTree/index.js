@@ -1,5 +1,7 @@
 import React, { useContext } from 'react'
-import { useHistory } from 'react-router-dom'
+import api from '../../services/api'
+import { toastInfo } from "../../components/toast";
+import { mountRobotFile } from '../../services/mountRobotFile'
 import { JsonContext } from '../../context'
 import { Container, Header, Wrapper, WrapperBody } from './styles'
 import { GitBranch, GitMerge } from 'react-feather'
@@ -12,11 +14,16 @@ import Node from '../../components/node'
 
 const MakeTree = () => {
   const { tree, nodes } = useContext(JsonContext)
-  let history = useHistory()
 
-  const redirect = () => {
-    history.push('/makeTree')
+  const redirect = async () => {
+    const response = await api.post('depthFirstSearch', tree)
+    mountRobotFile({
+      testSequences: response.data?.test_sequences,
+      filename: 'teasy_generator_tests.tests.robot',
+    })
+    toastInfo("Your test file has been generated.")
   }
+
   return (
     <Container>
       <NavDefault />
@@ -47,7 +54,7 @@ const MakeTree = () => {
           ))}
         </Wrapper>
       </WrapperBody>
-      <FooterDefault title={'LET´S GO'} action={redirect} />
+      <FooterDefault title={'GENERATE'} action={redirect} />
     </Container>
   )
 }

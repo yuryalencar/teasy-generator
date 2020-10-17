@@ -41,7 +41,7 @@ const InputSelect = ({ keyword, treePath, actualNode, isRoot }) => {
 
   useEffect(() => {
     setOptionSelected(getOption({ keyword, actualNode, isRoot, pages }))
-  }, [actualNode])
+  }, [actualNode, keyword, isRoot, pages])
 
   return (
     <FormGroup>
