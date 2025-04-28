@@ -4,7 +4,7 @@
 TeasyFSMGenerator is a web application designed to generate test sequences using Finite State Machine (FSM) methodology. This tool helps QA engineers and developers create comprehensive test cases based on state transitions in their applications.
 
 ## Features
-- FSM editor to link windows
+- FSM editor to link pages of your application
 - Automatic test sequence generation
 - Create an paths possible based in the diagram created
 - Export test sequences in robot framework script
